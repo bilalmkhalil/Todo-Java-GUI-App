@@ -1,81 +1,97 @@
 import java.awt.Color;
 // import java.awt.Component;
 // import java.awt.GridLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+// import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-// import javax.swing.JList;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 
-public class App {
-    public static void main(String[] args) throws Exception {
-        JFrame frame = new JFrame();
-        frame.setSize(1024,800);
-        frame.setTitle("ExON Todo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+class App extends JFrame {
+    public App() {
+        // JFrame frame = new JFrame();
+        setSize(1024,800);
+        setTitle("ExON Todo");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel upperPanel = new JPanel();
         upperPanel.setBackground(Color.blue);
         upperPanel.setBounds(0,0, 1024, 200);
-        // upperPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         upperPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 80));
         // upperPanel.setLayout(new GridLayout(0, 2, 150, 150));
-        // upperPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.red);
         mainPanel.setBounds(0,0, 1024, 800);
-        // mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
+        JPanel listPanel = new JPanel();
+        listPanel.setPreferredSize(new Dimension(350, 600));
+        // listPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        listPanel.setBackground(Color.DARK_GRAY);
 
+        JLabel title = new JLabel("ExON Todo App");
+        title.setForeground(Color.WHITE);
+        // listPanel.add(title);
+        // title.setText("khan");
 
-        JTextField textField = new JTextField(25);
-        // textField.setSize(420, 30);
+        JTextField textField = new JTextField();
+        textField.setPreferredSize(new Dimension(250, 35));
+        textField.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.white));
         
         JButton button = new JButton("Add");
-        button.setBackground(Color.darkGray);
-        button.setForeground(Color.white);
-        button.setBounds(0, 20, 300, 30);
-        // button.setBorder(BorderFactory.createLineBorder(Color.darkGray, 10));
-        button.setBorder(BorderFactory.createMatteBorder(10, 30, 10, 30, Color.darkGray));
+        button.setBackground(Color.DARK_GRAY);
+        button.setForeground(Color.WHITE);
+        button.setBorder(BorderFactory.createMatteBorder(10, 30, 10, 30, Color.DARK_GRAY));
 
-        // String week[]= { "Monday","Tuesday","Wednesday",
-        //                  "Thursday","Friday","Saturday","Sunday"};
+        String[] week = { "Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday" };
 
-        // JList list = new JList(week);
-        // list.setBounds(0, 20, 200, 30);
+        JList list = new JList(week);
+        list.setBackground(Color.ORANGE);
 
+        button.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(Color.GREEN);
+                button.setBorder(BorderFactory.createMatteBorder(10, 30, 10, 30, Color.GREEN));
+            }
         
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(Color.DARK_GRAY);
+                button.setBorder(BorderFactory.createMatteBorder(10, 30, 10, 30, Color.DARK_GRAY));
+            }
+        });
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("working");
+                title.setText("Working");
+            }
+        });
+        
+        upperPanel.add(title);
         upperPanel.add(textField);
         upperPanel.add(button);
+        listPanel.add(list);
+        mainPanel.add(listPanel); 
         // mainPanel.add(list);
-        frame.add(upperPanel);
-        frame.add(mainPanel);
-        // frame.getContentPane().setBackground(Color.cyan);
-        frame.setLayout(null);
-        frame.setVisible(true);
+        add(upperPanel);
+        add(mainPanel);
+        // getContentPane().setBackground(Color.cyan);
+        setLayout(null);
+        setResizable(false);
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        new App();
     }
 }
-
-// class Panel {
-//     JPanel panel;
-//     private int x, y, width, length;
-//     private String xAlignment, color;
-
-//     Panel(String color, int x, int y, int width, int length, String xAlignment) {
-//         this.color = color;
-//         this.x = x;
-//         this.y = y;
-//         this.width = width;
-//         this.length = length;
-//         this.xAlignment = xAlignment;
-//     }
-
-//     panel.setBackground(color);
-//     panel.setBounds(x, y, width, length);
-//     panel.setAlignmentX(xAlignment);
-
-// }
