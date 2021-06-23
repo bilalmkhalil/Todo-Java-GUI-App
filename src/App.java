@@ -3,15 +3,20 @@ import javax.swing.JFrame;
 
 import pages.SideBar;
 import pages.TodoList;
+import pages.HomePage;
 
 class App extends JFrame {
     public App() {
 
+        HomePage listContainer = new HomePage();
+        TodoList todoList = new TodoList();
+        todoList.setVisible(true);
+        listContainer.setVisible(false);
         SideBar sideBar = new SideBar();
-        TodoList listContainer = new TodoList();
         
         add(sideBar);
         add(listContainer);
+        add(todoList);
 
         setTitle("ExON Todo");
         setSize(1000,800);

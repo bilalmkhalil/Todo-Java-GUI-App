@@ -2,10 +2,27 @@ package splitContainers;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+// import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.Color;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+
+// import customComponents.Button;
 import customComponents.ListTab;
 import databaseClass.Database;
+import pages.HomePage;
+import pages.TodoList;
 
 public class ListTabContainer extends JPanel {
     private ListTab list1;
@@ -14,6 +31,8 @@ public class ListTabContainer extends JPanel {
     private ListTab list4;
     private ListTab list5;
     private Database database;
+
+    TodoList todoListPage = new TodoList();
 
     public ListTabContainer() {
         database = new Database();
@@ -32,24 +51,41 @@ public class ListTabContainer extends JPanel {
 
         setVisiblityFromDatabase();
         setTabTitleFromDatabase();
+        tabClickListener();
 
-        for(int i=0; i<database.countFiles(); i++) {
-            setVisiblity(i);
-        }
+        
 
-        add(list1);
-        add(list2);
-        add(list3);
-        add(list4);
-        add(list5);
+        setUpButtonListener();
 
         setPreferredSize(new Dimension(290, 540));
-        setLocation(0, 300);
+        setBackground(Color.WHITE);
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10,0,0,0);
+
+        add(list1, gbc);
+        add(list2, gbc);
+        add(list3, gbc);
+        add(list4, gbc);
+        add(list5, gbc);
     }
 
     public void setVisiblityFromDatabase() {
-        for(int i=0; i<database.countFiles(); i++) {
-            setVisiblity(i);
+        for(int num=0; num<database.countFiles(); num++) {
+            if(num == 0) {
+                list1.setVisible(true);
+            } else if(num==1) {
+                list2.setVisible(true);
+            } else if(num==2) {
+                list3.setVisible(true);
+            } else if(num==3) {
+                list4.setVisible(true);
+            } else if(num==4) {
+                list5.setVisible(true);
+            }
         }
     }
 
@@ -75,19 +111,72 @@ public class ListTabContainer extends JPanel {
         }
     }
 
-    public void setVisiblity(int num) {
-        if(num == 0) {
-            list1.setVisible(true);
-        } else if(num==1) {
-            list2.setVisible(true);
-        } else if(num==2) {
-            list3.setVisible(true);
-        } else if(num==3) {
-            list4.setVisible(true);
-        } else if(num==4) {
-            list5.setVisible(true);
-        }
+    private void setUpButtonListener() {
+        ActionListener buttonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object obj = e.getSource();
+
+                if(((JButton) obj).getText().equals("Delete")) {
+
+                    JLabel label = ((JLabel) (((JPanel) (((JButton) obj).getParent().getComponent(0))).getComponent(0)));
+                    String file = label.getText();
+
+                    database.deleteFile(file);
+                    label.getParent().getParent().setVisible(false);
+                }
+                
+            }
+        };
+        
+        ((JButton) list1.getComponent(1)).addActionListener(buttonListener);
+        ((JButton) list2.getComponent(1)).addActionListener(buttonListener);
+        ((JButton) list3.getComponent(1)).addActionListener(buttonListener);
+        ((JButton) list4.getComponent(1)).addActionListener(buttonListener);
+        ((JButton) list5.getComponent(1)).addActionListener(buttonListener);
     }
+
+    private void tabClickListener() {
+        MouseAdapter mouseAdapter = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                todoListPage.setVisible(false);
+                Object obj = e.getSource();
+
+                HomePage homePage = new HomePage();
+                homePage.setVisible(false);
+
+                JPanel panel = ((JPanel) ((JPanel) obj).getComponent(0));
+                JLabel label = ((JLabel) (panel.getComponent(0)));
+                String fileName = label.getText();
+                
+                // String fileName = (((JLabel) ( )).getComponent(0)).getText();
+                System.out.println(fileName);
+                todoListPage.setFile(fileName); 
+                todoListPage.setVisible(true);
+            }
+        };
+
+        list1.addMouseListener(mouseAdapter);
+        list2.addMouseListener(mouseAdapter);
+        list3.addMouseListener(mouseAdapter);
+        list4.addMouseListener(mouseAdapter);
+        list5.addMouseListener(mouseAdapter);
+    }
+
+    // public void setVisiblity(int num) {
+    //     if(num == 0) {
+    //         list1.setVisible(true);
+    //     } else if(num==1) {
+    //         list2.setVisible(true);
+    //     } else if(num==2) {
+    //         list3.setVisible(true);
+    //     } else if(num==3) {
+    //         list4.setVisible(true);
+    //     } else if(num==4) {
+    //         list5.setVisible(true);
+    //     }
+    // }
 
     public void setTabTitle(String name, int i) {
         if(i==0) {

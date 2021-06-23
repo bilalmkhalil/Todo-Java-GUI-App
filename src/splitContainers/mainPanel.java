@@ -19,7 +19,7 @@ public class mainPanel extends JPanel {
 
     // private String text = "";
     
-    public mainPanel() {
+    public mainPanel(String fileName) {
 
         listPanel = new JPanel();
         listPanel.setBackground(Color.WHITE);
@@ -28,9 +28,7 @@ public class mainPanel extends JPanel {
         listPanel.setBorder(BorderFactory.createTitledBorder("TODO LIST"));
         // listPanel.setBorder(BorderFactory.createMatteBorder(15, 15, 15, 15, Color.WHITE));
 
-        String[] week = { "Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday" };
-
-        list = new JList<String>(week);
+        list = new JList<String>();
         list.setFixedCellHeight(25);
         list.setBorder(BorderFactory.createMatteBorder(10, 15, 15, 15, Color.WHITE));
         // list.setRequestFocusEnabled(false);
@@ -38,14 +36,8 @@ public class mainPanel extends JPanel {
 
         listModel = new DefaultListModel<String>();
 
-        if(database.fileExist()) {
-            database.readFromFile(listModel);
-        } else {
-            listModel.addElement(week[0]);
-            listModel.addElement(week[1]);
-            listModel.addElement(week[2]);
-            listModel.addElement(week[3]);
-        }
+        database.readFromFile(listModel, fileName);
+        System.out.println("MainPanel File Name: " + fileName);
 
         list.setModel(listModel);
 
@@ -55,17 +47,17 @@ public class mainPanel extends JPanel {
         setBounds(0,200, 440, 600);
     }
 
-    public void setListValue(String text) {
+    public void setListValue(String text, String fileName) {
         listModel.addElement(text);
-        database.writeToFile(listModel);
+        database.writeToFile(listModel, fileName);
     }
-    public void delListValue(int index) {
+    public void delListValue(int index, String fileName) {
         listModel.remove(index);
-        database.writeToFile(listModel);
+        database.writeToFile(listModel, fileName);
     }
-    public void updateListValue(int index, String text) {
+    public void updateListValue(int index, String text, String fileName) {
         listModel.add(index, text);
-        database.writeToFile(listModel);
+        database.writeToFile(listModel, fileName);
     }
     public int indexVal() {
         return list.getSelectedIndex();

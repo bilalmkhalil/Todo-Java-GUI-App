@@ -2,7 +2,7 @@ package pages;
 
 import java.awt.Color;
 
-import javax.swing.JLabel;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -25,24 +25,10 @@ public class SideBar extends JPanel {
         todoListContainer = new ListTabContainer();
         sideBarTextFieldContainer.setTab(todoListContainer);
 
-        for(int i=0; i<database.countFiles(); i++) {
-            todoListContainer.setVisiblity(i);
-        }
-
         add(sideBarTextFieldContainer);
         add(todoListContainer);
-        setBounds(0, 0, 300, 800);
-        setBackground(Color.LIGHT_GRAY);
-    }
-
-    public void addTodoList() {
-        if(!sideTextField.getText().toString().isEmpty()) {
-            JLabel label = new JLabel(sideTextField.getText());
-            
-            JPanel listItem = new JPanel();
-            listItem.add(label);
-
-            todoListContainer.add(listItem); 
-        }
+        setBounds(0, 0, 320, 800);
+        setBackground(Color.WHITE);
+        setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(217, 218, 218)));
     }
 }

@@ -22,8 +22,11 @@ public class inputPanel extends JPanel {
     private Button updateButton;
     private Button deleteButton;
     private mainPanel listPanel;
+    String fileName;
     
-    public inputPanel() {
+    public inputPanel(String fileName) {
+        this.fileName = fileName;
+
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(230, 35));
         textField.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
@@ -106,7 +109,7 @@ public class inputPanel extends JPanel {
 
                 if(obj == addButton) {
                     if(!textField.getText().toString().isEmpty()) {
-                        listPanel.setListValue(textField.getText().toString());
+                        listPanel.setListValue(textField.getText().toString(), fileName);
                         textField.setText(null);
                     }
                 } else if (obj == deleteButton ) {
@@ -114,15 +117,15 @@ public class inputPanel extends JPanel {
                         int index = listPanel.indexVal();
                         System.out.println(index);
                         if(index >= 0)
-                            listPanel.delListValue(index);
+                            listPanel.delListValue(index, fileName);
                     }
                 } else {
                     if(!listPanel.isSelected()) {
                         int index = listPanel.indexVal();
                         System.out.println(index);
                         if(!textField.getText().toString().isEmpty()) {
-                            listPanel.delListValue(index);
-                            listPanel.updateListValue(index, textField.getText().toString());
+                            listPanel.delListValue(index, fileName);
+                            listPanel.updateListValue(index, textField.getText().toString(), fileName);
                             textField.setText(null);
                         }
                     }
