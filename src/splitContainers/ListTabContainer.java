@@ -14,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JPanel;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -32,10 +33,13 @@ public class ListTabContainer extends JPanel {
     private ListTab list5;
     private Database database;
 
-    TodoList todoListPage = new TodoList();
-
     public ListTabContainer() {
         database = new Database();
+
+        JLabel label = new JLabel("List Tabs");
+        label.setFont(label.getFont().deriveFont(20.0F));
+        label.setBorder(BorderFactory.createMatteBorder(0, 0, 30, 0, Color.WHITE));
+
 
         list1 = new ListTab();
         list2 = new ListTab();
@@ -57,7 +61,7 @@ public class ListTabContainer extends JPanel {
 
         setUpButtonListener();
 
-        setPreferredSize(new Dimension(290, 540));
+        setPreferredSize(new Dimension(290, 520));
         setBackground(Color.WHITE);
 
         setLayout(new GridBagLayout());
@@ -66,6 +70,7 @@ public class ListTabContainer extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10,0,0,0);
 
+        add(label, gbc);
         add(list1, gbc);
         add(list2, gbc);
         add(list3, gbc);
@@ -140,7 +145,6 @@ public class ListTabContainer extends JPanel {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                todoListPage.setVisible(false);
                 Object obj = e.getSource();
 
                 HomePage homePage = new HomePage();
@@ -149,11 +153,11 @@ public class ListTabContainer extends JPanel {
                 JPanel panel = ((JPanel) ((JPanel) obj).getComponent(0));
                 JLabel label = ((JLabel) (panel.getComponent(0)));
                 String fileName = label.getText();
-                
-                // String fileName = (((JLabel) ( )).getComponent(0)).getText();
-                System.out.println(fileName);
-                todoListPage.setFile(fileName); 
-                todoListPage.setVisible(true);
+
+                mainPanel mainpanel = new mainPanel();
+                mainpanel.fromFileToList(fileName);
+                // TodoList list = new TodoList(fileName);
+                // list.setVisible(true);
             }
         };
 

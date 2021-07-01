@@ -29,6 +29,6 @@ public class SideBar extends JPanel {
         add(todoListContainer);
         setBounds(0, 0, 320, 800);
         setBackground(Color.WHITE);
-        setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(217, 218, 218)));
+        setBorder(BorderFactory.createMatteBorder(0, 0, 0, 2, new Color(217, 218, 218)));
     }
 }

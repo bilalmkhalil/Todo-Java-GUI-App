@@ -26,12 +26,13 @@ public class ListTab extends JPanel {
 
     public ListTab() {
         JPanel titleContainer = new JPanel();
-        titleContainer.setPreferredSize(new Dimension(200, 28));
+        titleContainer.setPreferredSize(new Dimension(215, 28));
         titleContainer.setBackground(new Color(0,180,137));
+        titleContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         title = new JLabel("title");
         title.setForeground(Color.WHITE);
-        title.setFont(title.getFont().deriveFont(13.5f));
+        title.setFont(title.getFont().deriveFont(13.8F));
 
         titleContainer.add(title);
 

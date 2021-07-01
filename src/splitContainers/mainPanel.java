@@ -17,9 +17,9 @@ public class mainPanel extends JPanel {
     private JPanel listPanel;
     private Database database = new Database();
 
-    // private String text = "";
+    // private String fileName;
     
-    public mainPanel(String fileName) {
+    public mainPanel() {
 
         listPanel = new JPanel();
         listPanel.setBackground(Color.WHITE);
@@ -35,9 +35,7 @@ public class mainPanel extends JPanel {
         // list.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         listModel = new DefaultListModel<String>();
-
-        database.readFromFile(listModel, fileName);
-        System.out.println("MainPanel File Name: " + fileName);
+        // fromFileToList(fileName);
 
         list.setModel(listModel);
 
@@ -46,6 +44,14 @@ public class mainPanel extends JPanel {
         setBackground(Color.WHITE);
         setBounds(0,200, 440, 600);
     }
+
+    public void fromFileToList(String fileName) {
+        database.readFromFile(listModel, fileName);
+    }
+
+    // public void setFileName(String fileName) {
+    //     this.fileName = fileName;
+    // }
 
     public void setListValue(String text, String fileName) {
         listModel.addElement(text);

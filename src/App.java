@@ -1,16 +1,26 @@
 
 import javax.swing.JFrame;
 
+import databaseClass.Database;
 import pages.SideBar;
 import pages.TodoList;
 import pages.HomePage;
 
 class App extends JFrame {
+    private String[] title;
+    private Database database;
+
     public App() {
 
         HomePage listContainer = new HomePage();
-        TodoList todoList = new TodoList();
+        
+        database = new Database();
+        String[] list = database.existedFiles();
+        title = list[0].split("\\.");
+
+        TodoList todoList = new TodoList(title[0]);
         todoList.setVisible(true);
+        
         listContainer.setVisible(false);
         SideBar sideBar = new SideBar();
         
