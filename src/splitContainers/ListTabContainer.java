@@ -22,8 +22,7 @@ import javax.swing.JLabel;
 // import customComponents.Button;
 import customComponents.ListTab;
 import databaseClass.Database;
-import pages.HomePage;
-import pages.TodoList;
+
 
 public class ListTabContainer extends JPanel {
     private ListTab list1;
@@ -32,6 +31,9 @@ public class ListTabContainer extends JPanel {
     private ListTab list4;
     private ListTab list5;
     private Database database;
+    mainPanel listPanel = new mainPanel();
+    inputPanel upperPanel = new inputPanel();
+
 
     public ListTabContainer() {
         database = new Database();
@@ -57,8 +59,6 @@ public class ListTabContainer extends JPanel {
         setTabTitleFromDatabase();
         tabClickListener();
 
-        
-
         setUpButtonListener();
 
         setPreferredSize(new Dimension(290, 520));
@@ -76,6 +76,11 @@ public class ListTabContainer extends JPanel {
         add(list3, gbc);
         add(list4, gbc);
         add(list5, gbc);
+    }
+
+    public void setTodoList(mainPanel panel, inputPanel upperPanel) {
+        this.listPanel = panel;
+        this.upperPanel = upperPanel;
     }
 
     public void setVisiblityFromDatabase() {
@@ -147,16 +152,17 @@ public class ListTabContainer extends JPanel {
             public void mousePressed(MouseEvent e) {
                 Object obj = e.getSource();
 
-                HomePage homePage = new HomePage();
-                homePage.setVisible(false);
-
                 JPanel panel = ((JPanel) ((JPanel) obj).getComponent(0));
                 JLabel label = ((JLabel) (panel.getComponent(0)));
                 String fileName = label.getText();
 
-                mainPanel mainpanel = new mainPanel();
-                mainpanel.fromFileToList(fileName);
-                // TodoList list = new TodoList(fileName);
+                // listPanel.clearList();
+                // listPanel.fromFileToList(fileName);
+                upperPanel.setFileName(fileName);
+                upperPanel.changingListTab();
+                // mainPanel mainpanel = new mainPanel();
+                // mainpanel.fromFileToList(fileName);
+                // // TodoList list = new TodoList(fileName);
                 // list.setVisible(true);
             }
         };
@@ -167,20 +173,6 @@ public class ListTabContainer extends JPanel {
         list4.addMouseListener(mouseAdapter);
         list5.addMouseListener(mouseAdapter);
     }
-
-    // public void setVisiblity(int num) {
-    //     if(num == 0) {
-    //         list1.setVisible(true);
-    //     } else if(num==1) {
-    //         list2.setVisible(true);
-    //     } else if(num==2) {
-    //         list3.setVisible(true);
-    //     } else if(num==3) {
-    //         list4.setVisible(true);
-    //     } else if(num==4) {
-    //         list5.setVisible(true);
-    //     }
-    // }
 
     public void setTabTitle(String name, int i) {
         if(i==0) {

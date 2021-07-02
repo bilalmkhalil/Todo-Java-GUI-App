@@ -24,14 +24,12 @@ public class inputPanel extends JPanel {
     private mainPanel listPanel;
     String fileName;
     
-    public inputPanel(String fileName) {
-        this.fileName = fileName;
+    public inputPanel() {
 
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(230, 35));
         textField.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
         textField.setBackground(new Color(236,240,241));
-        // textField.setForeground(Color.WHITE);
         
         addButton = new Button("Add");
         updateButton = new Button("Update");
@@ -52,11 +50,18 @@ public class inputPanel extends JPanel {
         container.add(textField);
         container.add(Box.createRigidArea(new Dimension(5, 10)));
         container.add(buttonsContainer);
-
         add(container);
         setBackground(Color.WHITE);
         setBounds(0,0, 420, 200);
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 80));
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void changingListTab() {
+        listPanel.fromFileToList(fileName);
     }
 
     public void setList(mainPanel listPanel) {

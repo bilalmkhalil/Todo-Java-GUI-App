@@ -4,14 +4,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 
 public class Database {
-    // private String fileName;
-    private String text = "";
+    private static int counter = 0;
 
     public Database() {}
     
@@ -36,28 +34,44 @@ public class Database {
         }
     }
 
-    public void readFromFile(DefaultListModel<String> obj, String fileName) {
+    public void readFromFile(DefaultListModel<String> listModel, String fileName) {
+        String text = "";
+        ArrayList<String> list = new ArrayList<String>();
         int data = 0;
 
-        if(countFiles() > 0) { 
-            try {
-                String filePath = "database/" + fileName + ".txt";
-    
-                FileReader file = new FileReader(filePath);
-                while((data = file.read()) != -1) {
-                    text += (char)data;
-                }
-                file.close();
-                
-                List<String> list = Arrays.asList(text.split(","));
-    
-                for(String item:list) {
-                    obj.addElement(item);
-                }
-            } catch(IOException e) {
-                e.printStackTrace();
+        try {
+            String filePath = "database/" + fileName + ".txt";
+            System.out.println(filePath);
+
+            FileReader file = new FileReader(filePath);
+            while((data = file.read()) != -1) {
+                text += (char)data;
+            }
+            file.close();
+            
+            for(String listItem:text.split(",")) {
+                list.add(listItem);
+                System.out.println(listItem);
+            } 
+
+            for(String item:list) {
+                listModel.addElement(item);
+            }
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println(list.size());
+        if (counter != 0) {
+
+            for(int i=counter-1; i>=0; i--) {
+                System.out.println(listModel.elementAt(i) + "  Removed!");
+                listModel.remove(i);
             }
         }
+
+        counter = list.size();
     }
 
     public boolean fileExist(String fileName) {

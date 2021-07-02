@@ -1,3 +1,4 @@
-/vscode
+/.vscode
 test.java
 /lib
+.gitignore

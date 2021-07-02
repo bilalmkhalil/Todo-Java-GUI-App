@@ -12,16 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.event.MouseAdapter;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-// import java.awt.Component;
 
 
 public class ListTab extends JPanel {
     private JLabel title;
     private Button delButton;
-    // private ListTabContainer tabList = new ListTabContainer();
     Database database = new Database();
 
     public ListTab() {
@@ -39,10 +35,8 @@ public class ListTab extends JPanel {
         delButton = new Button("Delete");
 
         delButton.setPreferredSize(new Dimension(60, 35));
-        
-        // setUpButtonListener();
-        setUpButtonHover();
 
+        setUpButtonHover();
 
         setLayout(new FlowLayout(FlowLayout.RIGHT));
 
@@ -57,28 +51,6 @@ public class ListTab extends JPanel {
         System.out.println(text);
         title.setText(text);
     }
-
-    // private void setUpButtonListener() {
-    //     ActionListener buttonListener = new ActionListener() {
-    //         @Override
-    //         public void actionPerformed(ActionEvent e) {
-    //             Object obj = e.getSource();
-                
-    //             if(obj == delButton) {
-    //                 Component[] comp = delButton.getParent().getComponents();
-                    
-    //                 for(int i=0; i<comp.length-1; i++) {
-    //                     String file = ((JLabel) comp[i]).getText();
-    //                     database.deleteFile(file);
-    //                     tabList.disVisibility(file);
-    //                     // comp[i].getParent().setVisible(false);
-    //                 }
-    //             }
-    //         }
-    //     };
-
-    //     delButton.addActionListener(buttonListener);
-    // }
 
     private void setUpButtonHover() {
         MouseAdapter mouseAdapter = new MouseAdapter() {

@@ -72,7 +72,7 @@ public class SideBarTextFieldContainer extends JPanel {
     public void setTab(ListTabContainer listTab) {
         this.listTab = listTab;
     }
-
+    
     private void setUpButtonListener() {
         ActionListener buttonListener = new ActionListener() {
             @Override
