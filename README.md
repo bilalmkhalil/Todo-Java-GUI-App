@@ -4,4 +4,4 @@ University Project for OOP Class
 
 
 ## Screenshots of the GUI App
-![Screenshot](./screenshot/screenshot_1.png)
+![Screenshot](https://github.com/bilalmkhalil/Todo-Java-App/blob/main/screenshot/Screenshot_1.png)
