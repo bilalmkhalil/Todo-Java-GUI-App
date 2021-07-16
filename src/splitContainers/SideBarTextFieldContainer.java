@@ -36,7 +36,7 @@ public class SideBarTextFieldContainer extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         
-        JLabel label = new JLabel("ExON Todo App");
+        JLabel label = new JLabel("Todo App");
 
         label.setFont(label.getFont().deriveFont(28.0f));
         label.setBorder(BorderFactory.createMatteBorder(2, 0, 2, 0, Color.LIGHT_GRAY));

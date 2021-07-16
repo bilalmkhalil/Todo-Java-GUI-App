@@ -49,13 +49,15 @@ public class Database {
             }
             file.close();
             
-            for(String listItem:text.split(",")) {
-                list.add(listItem);
-                System.out.println(listItem);
-            } 
-
-            for(String item:list) {
-                listModel.addElement(item);
+            if(text != "") {
+                for(String listItem:text.split(",")) {
+                    list.add(listItem);
+                    System.out.println(listItem);
+                } 
+    
+                for(String item:list) {
+                    listModel.addElement(item);
+                }
             }
 
         } catch(IOException e) {

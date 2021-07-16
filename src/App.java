@@ -68,7 +68,7 @@ class App extends JFrame {
         add(SideBar);
         add(TodoList);
 
-        setTitle("ExON Todo");
+        setTitle("Todo App");
         setSize(1000,800);
         setLayout(null);
         setResizable(false);

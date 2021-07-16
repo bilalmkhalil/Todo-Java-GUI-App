@@ -2,7 +2,6 @@ package splitContainers;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-// import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -18,8 +17,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-
-// import customComponents.Button;
 import customComponents.ListTab;
 import databaseClass.Database;
 
@@ -155,15 +152,9 @@ public class ListTabContainer extends JPanel {
                 JPanel panel = ((JPanel) ((JPanel) obj).getComponent(0));
                 JLabel label = ((JLabel) (panel.getComponent(0)));
                 String fileName = label.getText();
-
-                // listPanel.clearList();
-                // listPanel.fromFileToList(fileName);
+                
                 upperPanel.setFileName(fileName);
                 upperPanel.changingListTab();
-                // mainPanel mainpanel = new mainPanel();
-                // mainpanel.fromFileToList(fileName);
-                // // TodoList list = new TodoList(fileName);
-                // list.setVisible(true);
             }
         };
 
